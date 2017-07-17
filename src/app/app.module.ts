@@ -18,6 +18,7 @@ import { ContactComponent } from './contact/contact.component';
 import { HttpModule } from '@angular/http';
 import {FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing/app-routing.module';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -29,8 +30,10 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
     AboutComponent,
     HomeComponent,
     ContactComponent,
+    LoginComponent,
   ],
   imports: [
+  BrowserAnimationsModule,
   BrowserModule,
   FormsModule,
   HttpModule,
@@ -41,6 +44,7 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
   providers: [DishService,
       PromotionService,
       LeadershipService],
+  entryComponents: [LoginComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
