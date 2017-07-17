@@ -19,6 +19,7 @@ import { HttpModule } from '@angular/http';
 import {FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { LoginComponent } from './login/login.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { LoginComponent } from './login/login.component';
   HttpModule,
   MaterialModule,
   FlexLayoutModule,
-  AppRoutingModule
+  AppRoutingModule,
+  ReactiveFormsModule 
 ],
   providers: [DishService,
       PromotionService,
