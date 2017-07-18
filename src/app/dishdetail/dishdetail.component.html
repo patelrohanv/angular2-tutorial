@@ -13,11 +13,15 @@
         </p>
       </md-card-content>
       <md-card-actions>
-         <button md-button (click)="goBack()">BACK</button>
+        <button md-button (click)="goBack()">BACK</button>
         <button md-button>LIKE</button>
         <button md-button>SHARE</button>
       </md-card-actions>
     </md-card>
+  </div>
+  <div [hidden]="dish">
+    <md-spinner></md-spinner>
+    <h4>Loading . . . Please Wait</h4>
   </div>
 
   <div fxFlex="40">
@@ -31,13 +35,17 @@
         <md-list fxFlex>
           <md-list-item *ngFor="let comment of dish.comments">
             <p md-line> <span> {{comment.comment}} </span></p>
-             <p md-line> <span> {{comment.rating}} Stars </span></p>
-             <p md-line> <span> -- {{comment.author}} {{comment.date | date:'mediumDate'}}  </span> </p>
-             <br>
+            <p md-line> <span> {{comment.rating}} Stars </span></p>
+            <p md-line> <span> -- {{comment.author}} {{comment.date | date:'mediumDate'}}  </span> </p>
+            <br>
           </md-list-item>
         </md-list>
       </md-card-content>
     </md-card>
+  </div>
+  <div [hidden]="dish">
+    <md-spinner></md-spinner>
+    <h4>Loading . . . Please Wait</h4>
   </div>
 
 </div>
