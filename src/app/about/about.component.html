@@ -52,7 +52,7 @@
     </md-card>
   </div>
 
-  <div fxFlex>
+  <div fxFlex *ngIf="leaders">
     <h2>Corporate Leadership</h2>
     <md-list flex-layout-gap="50px">
       <md-list-item *ngFor="let leader of leaders">
@@ -60,7 +60,11 @@
         <h1 md-line>{{leader.name}} {{leader.abbr}}</h1>
         <span md-line>{{leader.designation}}</span>
         <span md-line>{{leader.description}}</span>
-    </md-list-item>
+      </md-list-item>
     </md-list>
+  </div>
+  <div [hidden]="leaders">
+    <md-spinner></md-spinner>
+    <h4>Loading . . . Please Wait</h4>
   </div>
 </div>
