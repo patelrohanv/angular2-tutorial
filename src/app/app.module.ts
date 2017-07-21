@@ -10,16 +10,18 @@ import { DishdetailComponent } from './dishdetail/dishdetail.component';
 import { DishService } from './services/dish.service';
 import { PromotionService } from './services/promotion.service';
 import { LeadershipService } from './services/leadership.service';
+import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './contact/contact.component';
-import { HttpModule } from '@angular/http';
+import { HttpModule } from '@angular/http';
 import {FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { baseURL } from './shared/baseurl';
 
 @NgModule({
   declarations: [
@@ -41,12 +43,15 @@ import { ReactiveFormsModule } from '@angular/forms';
   MaterialModule,
   FlexLayoutModule,
   AppRoutingModule,
-  ReactiveFormsModule 
+  ReactiveFormsModule
 ],
   providers: [DishService,
       PromotionService,
-      LeadershipService],
-  entryComponents: [LoginComponent],
-  bootstrap: [AppComponent]
+      LeadershipService,
+      ProcessHTTPMsgService,
+      {provide: 'BaseURL', useValue: baseURL}
+    ],
+    entryComponents: [LoginComponent],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

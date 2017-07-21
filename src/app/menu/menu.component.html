@@ -12,15 +12,15 @@
       <md-grid-tile *ngFor="let dish of dishes" [routerLink]="['/dishdetail', dish.id]">
         <!-- <md-grid-tile *ngFor="let dish of dishes" (click) = "onSelect(dish)"> -->
         <!-- <md-grid-tile *ngFor="let dish of dishes"> -->
-        <img height="200px" src={{dish.image}} alt={{dish.name}}>
+        <img height="200px" src="{{BaseURL + dish.image}}" alt={{dish.name}}>
         <md-grid-tile-footer>
           <h1 md-line>{{dish.name | uppercase}}</h1>
         </md-grid-tile-footer>
       </md-grid-tile>
     </md-grid-list>
   </div>
-<div [hidden]="dishes">
-  <md-spinner></md-spinner>
-  <h4>Loading . . . Please Wait</h4>
-</div>
+  <div [hidden]="dishes">
+    <md-spinner></md-spinner>
+    <h4>Loading . . . Please Wait</h4>
+  </div>
 </div>
