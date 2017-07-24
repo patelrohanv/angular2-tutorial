@@ -26,6 +26,7 @@ export class DishdetailComponent implements OnInit {
 
   errMess: string
 
+
   formErrors = {
     'author': '',
     'comment': ''
@@ -35,19 +36,21 @@ export class DishdetailComponent implements OnInit {
     'author': {
       'required': 'Author Name is required.',
       'minlength': 'Author Name must be at least 2 characters long.',
-  },
+    },
     'comment': {
       'required': 'Comment is required.'
     }
   };
 
+  dishcopy = null;
+
   constructor(private dishservice: DishService,
     private route: ActivatedRoute,
     private location: Location,
     private fb: FormBuilder,
-   @Inject('BaseURL') private BaseURL) {
-        this.createForm();
-    }
+    @Inject('BaseURL') private BaseURL) {
+    this.createForm();
+  }
 
   ngOnInit() {
 
@@ -86,8 +89,12 @@ export class DishdetailComponent implements OnInit {
     this.commentForm.reset({
       firstname: '',
       rating: '5',
-      comment:''
+      comment: ''
     });
+
+    this.dishcopy.comments.push(this.comment);
+    this.dishcopy.save()
+      .subscribe(dish => { this.dish = dish; console.log(this.dish); });
 
   }
 
