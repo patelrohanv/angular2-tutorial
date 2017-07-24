@@ -9,7 +9,8 @@
 
   <div fxFlex *ngIf="dishes">
     <md-grid-list cols="2" rowHeight="200px">
-      <md-grid-tile *ngFor="let dish of dishes" [routerLink]="['/dishdetail', dish.id]">
+      <md-grid-tile *ngFor="let dish of dishes" [routerLink]="['/dishdetail', dish.id]" appHighlight>
+        <!-- <md-grid-tile *ngFor="let dish of dishes" [routerLink]="['/dishdetail', dish.id]"> -->
         <!-- <md-grid-tile *ngFor="let dish of dishes" (click) = "onSelect(dish)"> -->
         <!-- <md-grid-tile *ngFor="let dish of dishes"> -->
         <img height="200px" src="{{BaseURL + dish.image}}" alt={{dish.name}}>
@@ -20,7 +21,8 @@
     </md-grid-list>
   </div>
   <div [hidden]="dishes || errMess">
-    <md-spinner></md-spinner><h4>Loading . . . Please Wait</h4>
+    <md-spinner></md-spinner>
+    <h4>Loading . . . Please Wait</h4>
   </div>
   <div *ngIf="errMess">
     <h2>Error</h2>
