@@ -1,6 +1,6 @@
 <div class="container" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign.gt-md="space-around center" fxLayoutGap="10px" fxLayoutGap.xs="0">
 
-  <div fxFlex="40">
+  <div fxFlex="40" *ngIf="dish" [@visibility]="visibility">
     <md-card *ngIf="dish">
       <md-card-header>
         <md-card-title>
@@ -28,7 +28,7 @@
     <h4>Loading . . . Please Wait</h4>
   </div> -->
 
-  <div fxFlex="40">
+  <div fxFlex="40" *ngIf="dish" [@visibility]="visibility">
     <md-card *ngIf="dish">
       <md-card-header>
         <md-card-title>
@@ -42,12 +42,12 @@
             <p md-line> <span> {{comment.rating}} Stars </span></p>
             <p md-line> <span> -- {{comment.author}} {{comment.date | date:'mediumDate'}}  </span> </p>
             <br>
-        </md-list-item>
-          <md-list-item  *ngIf="commentForm.valid">
-              <p md-line> <span> {{commentForm.value.comment}} </span></p>
-              <p md-line> <span> {{commentForm.value.rating}} Stars </span></p>
-              <p md-line> <span> -- {{commentForm.value.author}}</span> </p>
-              <br>
+          </md-list-item>
+          <md-list-item *ngIf="commentForm.valid">
+            <p md-line> <span> {{commentForm.value.comment}} </span></p>
+            <p md-line> <span> {{commentForm.value.rating}} Stars </span></p>
+            <p md-line> <span> -- {{commentForm.value.author}}</span> </p>
+            <br>
           </md-list-item>
         </md-list>
       </md-card-content>
@@ -61,7 +61,7 @@
         <md-input-container class="full-width" dividerColor="{{(formErrors.author) ? 'warn' : 'danger'}}">
           <input mdInput formControlName="author" placeholder="Name" type="text" required>
           <md-hint>
-              <br>
+            <br>
             <span [hidden]="!(formErrors.author)">
                 {{formErrors.author}}</span>
           </md-hint>
@@ -75,7 +75,7 @@
           <textarea mdInput formControlName="comment" placeholder="Your Comment" rows=12 required></textarea>
         </md-input-container>
         <md-hint>
-            <br>
+          <br>
           <span [hidden]="!(formErrors.comment)">
             {{formErrors.comment}}</span>
         </md-hint>
