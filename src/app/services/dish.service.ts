@@ -15,24 +15,24 @@ import { RestangularModule, Restangular } from 'ngx-restangular';
 export class DishService {
 
   constructor(private restangular: Restangular,
-              private ProcessHTTPMsgService: ProcessHTTPMsgService) { }
+    private ProcessHTTPMsgService: ProcessHTTPMsgService) { }
 
   getDishes(): Observable<Dish[]> {
     return this.restangular.all('dishes').getList();
   }
 
   getDish(id: number): Observable<Dish> {
-    return  this.restangular.one('dishes', id).get();
+    return this.restangular.one('dishes', id).get();
   }
 
   getFeaturedDish(): Observable<Dish> {
-    return this.restangular.all('dishes').getList({featured: true})
+    return this.restangular.all('dishes').getList({ featured: true })
       .map(dishes => dishes[0]);
   }
 
   getDishIds(): Observable<number[]> {
     return this.getDishes()
       .map(dishes => { return dishes.map(dish => dish.id) })
-      .catch(error => { return error; } );
+      .catch(error => { return error; });
   }
 }
