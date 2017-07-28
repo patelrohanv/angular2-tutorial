@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Feedback } from '../shared/feedback';
 import { Observable } from 'rxjs/Observable';
 import { Http, Response } from '@angular/http';
 import { baseURL } from '../shared/baseurl';
@@ -14,6 +15,15 @@ export class FeedbackService {
     constructor(private restangular: Restangular,
       private ProcessHTTPMsgService: ProcessHTTPMsgService) { }
 
-  submitFeedback() {}
+  submitFeedback(feedback: Feedback) {
+      this.restangular.all('feedback').post(feedback)
+  }
 
+  getFeedbacks(): Observable<Feedback> {
+    return this.restangular.all('feedback').getList();
+  }
+
+  getFeedback(email: string): Observable<Feedback> {
+    return this.restangular.one('feedback', email).get();
+  }
 }

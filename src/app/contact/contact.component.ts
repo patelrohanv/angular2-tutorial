@@ -1,11 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { FeedbackService } from '../services/feedback.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Params, ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 import { Feedback, ContactType } from '../shared/feedback';
+import 'rxjs/add/operator/switchMap';
+import { visibility } from '../animations/app.animation';
+
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.scss']
+  styleUrls: ['./contact.component.scss'],
+
+  animations: [
+    visibility()
+  ]
 })
 
 export class ContactComponent implements OnInit {
@@ -13,6 +23,9 @@ export class ContactComponent implements OnInit {
   feedbackForm: FormGroup;
   feedback: Feedback;
   contactType = ContactType;
+
+  errMess: string;
+
   formErrors = {
     'firstname': '',
     'lastname': '',
@@ -41,7 +54,15 @@ export class ContactComponent implements OnInit {
     },
   };
 
-  constructor(private fb: FormBuilder) {
+  contactCopy = null;
+
+  visibility = 'shown';
+
+  constructor(private feedbackService: FeedbackService,
+    private route: ActivatedRoute,
+    private location: Location,
+    private fb: FormBuilder,
+    @Inject('BaseURL') private BaseURL) {
     this.createForm();
   }
 
@@ -65,7 +86,10 @@ export class ContactComponent implements OnInit {
 
   onSubmit() {
     this.feedback = this.feedbackForm.value;
+    this.contactCopy = this.feedback;
+
     console.log(this.feedback);
+    this.feedbackService.submitFeedback(this.feedback);
     this.feedbackForm.reset({
       firstname: '',
       lastname: '',

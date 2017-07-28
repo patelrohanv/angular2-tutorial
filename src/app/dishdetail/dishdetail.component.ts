@@ -2,13 +2,14 @@ import { DishService } from '../services/dish.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Params, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { Component, OnInit, Input } from '@angular/core';
-import { Inject } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 import { Dish } from '../shared/dish';
 import { Comment } from '../shared/comment';
 import 'rxjs/add/operator/switchMap';
 // import { trigger, state, style, animate, transition } from '@angular/animations';
 import { visibility } from '../animations/app.animation';
+import { flyInOut } from '../animations/app.animation';
+import { expand } from '../animations/app.animation';
 
 
 @Component({
@@ -30,7 +31,9 @@ import { visibility } from '../animations/app.animation';
   //   ])
   // ]
   animations: [
-    visibility()
+    visibility(),
+    flyInOut(),
+    expand()
   ]
 })
 
