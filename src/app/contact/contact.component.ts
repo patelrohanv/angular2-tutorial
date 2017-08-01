@@ -54,9 +54,10 @@ export class ContactComponent implements OnInit {
     },
   };
 
-  contactCopy = null;
-
   visibility = 'shown';
+
+  formControl: Boolean;
+
 
   constructor(private feedbackService: FeedbackService,
     private route: ActivatedRoute,
@@ -86,10 +87,16 @@ export class ContactComponent implements OnInit {
 
   onSubmit() {
     this.feedback = this.feedbackForm.value;
-    this.contactCopy = this.feedback;
+    //this.contactCopy = this.feedback;
 
     console.log(this.feedback);
-    this.feedbackService.submitFeedback(this.feedback);
+
+    var that = this.formControl;
+    this.feedbackService.submitFeedback(this.feedback).subscribe(
+        function(response){
+            that => that.formControl = true
+        }
+    );
     this.feedbackForm.reset({
       firstname: '',
       lastname: '',
@@ -99,7 +106,9 @@ export class ContactComponent implements OnInit {
       contacttype: 'None',
       message: ''
     });
+    this.formControl = false;
   }
+
 
   onValueChanged(data?: any) {
     if (!this.feedbackForm) { return; }

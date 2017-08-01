@@ -8,22 +8,23 @@ import 'rxjs/add/operator/delay';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
 import { RestangularModule, Restangular } from 'ngx-restangular';
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class FeedbackService {
 
-    constructor(private restangular: Restangular,
-      private ProcessHTTPMsgService: ProcessHTTPMsgService) { }
+  constructor(private restangular: Restangular,
+    private ProcessHTTPMsgService: ProcessHTTPMsgService) { }
 
-  submitFeedback(feedback: Feedback) {
-      this.restangular.all('feedback').post(feedback)
+  submitFeedback(feedback: Feedback): Observable<Response> {
+    return this.restangular.all('feedback').post(feedback)
   }
 
   getFeedbacks(): Observable<Feedback> {
     return this.restangular.all('feedback').getList();
   }
 
-  getFeedback(email: string): Observable<Feedback> {
-    return this.restangular.one('feedback', email).get();
+  getFeedback(id: number): Observable<Feedback> {
+    return this.restangular.one('feedback', id).get();
   }
 }
