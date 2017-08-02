@@ -58,6 +58,8 @@ export class ContactComponent implements OnInit {
 
   formControl: Boolean;
 
+  spinControl: Boolean;
+
 
   constructor(private feedbackService: FeedbackService,
     private route: ActivatedRoute,
@@ -90,23 +92,34 @@ export class ContactComponent implements OnInit {
     //this.contactCopy = this.feedback;
 
     console.log(this.feedback);
+    this.spinControl = true;
+    setTimeout(()=>{
+        var that = this;
+        this.feedbackService.submitFeedback(this.feedback).subscribe(
+            function(response){
+                that.formControl = true
+            }
+        );
+        }, 3000)
 
-    var that = this.formControl;
-    this.feedbackService.submitFeedback(this.feedback).subscribe(
-        function(response){
-            that => that.formControl = true
-        }
-    );
-    this.feedbackForm.reset({
-      firstname: '',
-      lastname: '',
-      telnum: '',
-      email: '',
-      agree: false,
-      contacttype: 'None',
-      message: ''
-    });
-    this.formControl = false;
+    setTimeout(()=>{
+        this.spinControl = false;
+    },1000)
+    setTimeout(()=>{
+        this.feedback = null;
+
+        this.feedbackForm.reset({
+          firstname: '',
+          lastname: '',
+          telnum: '',
+          email: '',
+          agree: false,
+          contacttype: 'None',
+          message: ''
+        });
+        this.formControl = false;
+        }, 5000)
+
   }
 
 
